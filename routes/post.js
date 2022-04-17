@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const bcrypt = require("bcrypt");
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
@@ -16,21 +15,21 @@ router.get("/:id", async (req, res) => {
 
         if (post) {
             res.status(200).json({
-                post: post,
+                posts: post,
                 error: false,
                 errorMsg: ''
             })
         }
         else {
             res.status(404).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: "Post not found"
             })
         }
     } catch (error) {
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: 'Something went wrong'
         })
@@ -46,14 +45,14 @@ router.post("/", async (req, res) => {
 
         if (newPost) {
             res.status(200).json({
-                post: newPost,
+                posts: newPost,
                 error: false,
                 errorMsg: ''
             })
         }
         else {
             res.status(200).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: 'Something went wrong'
             })
@@ -62,7 +61,7 @@ router.post("/", async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: error
         })
@@ -90,14 +89,14 @@ router.put("/:id", async (req, res) => {
 
             if (updatedPost?.id) {
                 res.status(200).json({
-                    post: updatedPost,
+                    posts: updatedPost,
                     error: false,
                     errorMsg: ''
                 })
             }
             else {
                 res.status(403).json({
-                    post: {},
+                    posts: {},
                     error: true,
                     errorMsg: 'Unable to update post'
                 })
@@ -105,7 +104,7 @@ router.put("/:id", async (req, res) => {
         }
         else {
             res.status(403).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: "You can update only your post!"
             })
@@ -114,7 +113,7 @@ router.put("/:id", async (req, res) => {
         console.log('skdkk', error);
 
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: error
         })
@@ -141,14 +140,14 @@ router.delete("/:id", async (req, res) => {
 
             if (deletedPost?.id) {
                 res.status(200).json({
-                    post: deletedPost,
+                    posts: deletedPost,
                     error: false,
                     errorMsg: ''
                 })
             }
             else {
                 res.status(403).json({
-                    post: {},
+                    posts: {},
                     error: true,
                     errorMsg: 'Unable to delete post'
                 })
@@ -156,14 +155,14 @@ router.delete("/:id", async (req, res) => {
         }
         else {
             res.status(403).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: "You can delete only your post!"
             })
         }
     } catch (error) {
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: error
         })
@@ -202,14 +201,14 @@ router.put("/:id/like", async (req, res) => {
 
                 if (likedPost) {
                     res.status(200).json({
-                        post: likedPost,
+                        posts: likedPost,
                         error: false,
                         errorMsg: ''
                     })
                 }
                 else {
                     res.status(200).json({
-                        post: {},
+                        posts: {},
                         error: true,
                         errorMsg: 'Unable to like the post'
                     })
@@ -231,14 +230,14 @@ router.put("/:id/like", async (req, res) => {
 
                 if (disLikedPost) {
                     res.status(200).json({
-                        post: disLikedPost,
+                        posts: disLikedPost,
                         error: false,
                         errorMsg: ''
                     })
                 }
                 else {
                     res.status(200).json({
-                        post: {},
+                        posts: {},
                         error: true,
                         errorMsg: 'Unable to dislike the post'
                     })
@@ -248,7 +247,7 @@ router.put("/:id/like", async (req, res) => {
         }
         else {
             res.status(404).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: 'Post not found'
             })
@@ -256,7 +255,7 @@ router.put("/:id/like", async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: error
         })
@@ -294,14 +293,14 @@ router.put("/:id/like", async (req, res) => {
 
                 if (likedPost) {
                     res.status(200).json({
-                        post: likedPost,
+                        posts: likedPost,
                         error: false,
                         errorMsg: ''
                     })
                 }
                 else {
                     res.status(200).json({
-                        post: {},
+                        posts: {},
                         error: true,
                         errorMsg: 'Unable to like the post'
                     })
@@ -323,14 +322,14 @@ router.put("/:id/like", async (req, res) => {
 
                 if (disLikedPost) {
                     res.status(200).json({
-                        post: disLikedPost,
+                        posts: disLikedPost,
                         error: false,
                         errorMsg: ''
                     })
                 }
                 else {
                     res.status(200).json({
-                        post: {},
+                        posts: {},
                         error: true,
                         errorMsg: 'Unable to dislike the post'
                     })
@@ -340,7 +339,7 @@ router.put("/:id/like", async (req, res) => {
         }
         else {
             res.status(404).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: 'Post not found'
             })
@@ -348,7 +347,7 @@ router.put("/:id/like", async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: error
         })
@@ -371,6 +370,10 @@ router.get("/timeline/:id", async (req, res) => {
             where: {
                 userId: loggedInUser?.id,
             },
+            include: {
+                likedBy: true,
+                author: true
+            }
         })
 
         if (loggedInUser && userPosts) {
@@ -385,14 +388,14 @@ router.get("/timeline/:id", async (req, res) => {
             )
 
             res.status(200).json({
-                post: [...userPosts, ...friendsPost],
+                posts: [...userPosts, ...friendsPost],
                 error: false,
                 errorMsg: ''
             })
         }
         else {
             res.status(403).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: "Something went wrong"
             })
@@ -400,7 +403,7 @@ router.get("/timeline/:id", async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: error
         })
@@ -428,14 +431,14 @@ router.get("/profile/:id", async (req, res) => {
 
 
             res.status(200).json({
-                post: loggedInUserPosts,
+                posts: loggedInUserPosts,
                 error: false,
                 errorMsg: ''
             })
         }
         else {
             res.status(403).json({
-                post: {},
+                posts: {},
                 error: true,
                 errorMsg: "Something went wrong"
             })
@@ -443,7 +446,7 @@ router.get("/profile/:id", async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            post: {},
+            posts: {},
             error: true,
             errorMsg: error
         })

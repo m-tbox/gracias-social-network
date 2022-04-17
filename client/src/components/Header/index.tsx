@@ -5,7 +5,7 @@ import {
     RightSection,
     SearchBar,
     Input,
-    Link,
+    OptionLink,
     LinkContainer,
     IconItem,
     BadgeNumber,
@@ -24,9 +24,11 @@ function Header({ }: Props) {
     return (
         <Container>
             <LeftSection>
-                <Logo>
-                    Gracias
-                </Logo>
+                <OptionLink to="/">
+                    <Logo>
+                        Gracias
+                    </Logo>
+                </OptionLink>
             </LeftSection>
 
             <CenterSection>
@@ -38,8 +40,8 @@ function Header({ }: Props) {
 
             <RightSection>
                 <LinkContainer>
-                    <Link>Homepage</Link>
-                    <Link>Timeline</Link>
+                    <OptionLink to="/">Homepage</OptionLink>
+                    <OptionLink to="/">Timeline</OptionLink>
                 </LinkContainer>
 
                 <IconContainer>

@@ -1,11 +1,15 @@
 const express = require('express');
+const path = require("path");
+const cors = require('cors');  
+
 const app = express();
 const port = process.env.PORT || 5002;
-const path = require("path");
 
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const postRoute = require("./routes/post");
+
+app.use(cors());
 
 app.use(express.json());
 app.use("/api/auth", authRoute);

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Search from '@mui/icons-material/Search'
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     height: 50px;
@@ -63,8 +64,10 @@ export const LinkContainer = styled.div`
    cursor: pointer;
 `
 
-export const Link = styled.div`
+export const OptionLink = styled(Link)`
    padding: 10px;
+   text-decoration: none;
+   color: var(--app-theme-text-color)
 `
 
 export const IconContainer = styled.div`

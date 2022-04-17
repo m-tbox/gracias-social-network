@@ -20,7 +20,12 @@ import {
 } from './StyledPost'
 
 
-function Post({ id, description, image, userId, date, likes, comments }: PostTypes) {
+function Post({ id, description, image, date, likedBy, comments, author }: PostTypes) {
+    let likes = 0;
+    if (likedBy && likedBy.length) {
+        likes = likedBy.length;
+    }
+
     const [postLike, setPostLike] = useState(likes);
     const [liked, setLiked] = useState(false);
 
@@ -33,16 +38,18 @@ function Post({ id, description, image, userId, date, likes, comments }: PostTyp
         }
     }
 
+    const profileUrl = author?.profilePicture || 'profile.png';
+
     return (
         <Container>
             <Wrapper>
                 <TopSection>
                     <UserInfo>
                         <ProfileImage
-                            src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5ODc1NTM4NjMyOTc2Mzcz/gettyimages-693134468.jpg"
+                            src={profileUrl}
                             alt=""
                         />
-                        <UsernameText> Tom Cruise </UsernameText>
+                        <UsernameText> {author?.username} </UsernameText>
                         <PostDate> {date} </PostDate>
                     </UserInfo>
 

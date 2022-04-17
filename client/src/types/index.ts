@@ -16,9 +16,21 @@ export type PostTypes = {
     description?: string,
     image: string,
     date: string,
-    userId: string,
     likes?: number,
     comments?: string,
+    author?: {
+        id: number,
+        username: string,
+        email: string,
+        profilePicture?: string,
+        coverPicture?: string,
+        isAdmin?: boolean,
+        description?: string,
+        city?: string,
+        createdAt?: string,
+        updatedAt?: string
+    },
+    likedBy?: []
 }
 
 export type UserTypes = {
