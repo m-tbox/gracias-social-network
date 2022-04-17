@@ -60,7 +60,7 @@ function Header({ }: Props) {
                 </IconContainer>
 
                 <OptionLink to="/profile/2">
-                    <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt="" />
+                    <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt=""  />
                 </OptionLink>
             </RightSection>
         </Container>
