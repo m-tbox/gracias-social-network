@@ -11,13 +11,17 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static("client/build"));
-    const path = require("path");
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
-}
+const path = require("path");
+// app.use(express.static("client/build"));
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
+// app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// });
+
+app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
