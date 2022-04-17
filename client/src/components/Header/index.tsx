@@ -12,7 +12,7 @@ import {
     IconContainer,
     ProfileImage,
     SearchIcon,
-    Logo
+    Logo,
 } from "./StyledHeader"
 import PersonIcon from '@mui/icons-material/Person'
 import ChatIcon from '@mui/icons-material/Chat';
@@ -59,7 +59,9 @@ function Header({ }: Props) {
                     </IconItem>
                 </IconContainer>
 
-                <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt="" />
+                <OptionLink to="/profile/2">
+                    <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt="" />
+                </OptionLink>
             </RightSection>
         </Container>
     )

@@ -19,8 +19,9 @@ import {
     Wrapper
 } from './StyledPost'
 
+import {format} from 'timeago.js';
 
-function Post({ id, description, image, date, likedBy, comments, author }: PostTypes) {
+function Post({ id, description, image, createdAt, likedBy, comments, author }: PostTypes) {
     let likes = 0;
     if (likedBy && likedBy.length) {
         likes = likedBy.length;
@@ -50,7 +51,7 @@ function Post({ id, description, image, date, likedBy, comments, author }: PostT
                             alt=""
                         />
                         <UsernameText> {author?.username} </UsernameText>
-                        <PostDate> {date} </PostDate>
+                        <PostDate> {format(createdAt)} </PostDate>
                     </UserInfo>
 
                     <MoreVertIcon />

@@ -372,7 +372,7 @@ router.get("/timeline/:id", async (req, res) => {
             },
             include: {
                 likedBy: true,
-                author: true
+                author: true,
             }
         })
 
@@ -383,6 +383,10 @@ router.get("/timeline/:id", async (req, res) => {
                         where: {
                             userId: friend.id,
                         },
+                        include: {
+                            likedBy: true,
+                            author: true,
+                        }
                     })
                 })
             )

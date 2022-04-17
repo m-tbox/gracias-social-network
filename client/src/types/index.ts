@@ -15,7 +15,7 @@ export type PostTypes = {
     id: string,
     description?: string,
     image: string,
-    date: string,
+    createdAt: string,
     likes?: number,
     comments?: string,
     author?: {
