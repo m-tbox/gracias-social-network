@@ -26,7 +26,7 @@ function Header({ }: Props) {
             <LeftSection>
                 <OptionLink to="/">
                     <Logo>
-                        Gracias
+                        Gracias Yayyy
                     </Logo>
                 </OptionLink>
             </LeftSection>
