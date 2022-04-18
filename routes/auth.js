@@ -83,7 +83,7 @@ router.post("/login", async (req, res) => {
           errorMsg: ''
         })
       } else {
-        res.status(400).json({
+        res.status(200).json({
           userData: {},
           error: true,
           errorMsg: "Invalid Password"
@@ -92,7 +92,7 @@ router.post("/login", async (req, res) => {
 
     }
     else {
-      res.status(401).json({
+      res.status(200).json({
         userData: {},
         error: true,
         errorMsg: "User does not exist"

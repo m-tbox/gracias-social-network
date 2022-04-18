@@ -3,35 +3,38 @@ import Share from "../Share"
 import { Container, Wrapper } from "./StyledFeed"
 // import { Posts } from '../../dummyData'
 import { PostTypes } from "../../types"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import axios from "axios";
-import { BASE_URL, PROFILE_POSTS, TIMELINE_URL } from "../../constants";
+import { PROFILE_POSTS, TIMELINE_URL } from "../../constants";
+import { AuthConetext } from "context/auth/context"
 
 type Props = {
     fromProfile?: boolean,
-    userId?: number
 }
 
 
-function Feed({ userId }: Props) {
+function Feed({ fromProfile }: Props) {
     const [posts, setPosts] = useState([]);
+    const { state } = useContext(AuthConetext as any);
+    const userData = state.user?.userData;
+    const userId = userData?.id;
 
     useEffect(() => {
         const fetchTimeLine = async () => {
-            let res = userId ?
-                await axios.get(`${BASE_URL}/${PROFILE_POSTS}/${userId}`) :
-                await axios.get(`${BASE_URL}/${TIMELINE_URL}/2`);
+            let res = fromProfile ?
+                await axios.get(`${PROFILE_POSTS}/${userId}`) :
+                await axios.get(`${TIMELINE_URL}/${userId}`);
 
             setPosts(res.data ? res.data.posts : []);
         }
 
         fetchTimeLine();
-    }, []);
+    }, [userId]);
 
     return (
         <Container>
             <Wrapper>
-                {!userId && <Share />}
+                {!fromProfile && <Share />}
 
                 {
                     posts?.map((post: PostTypes, index: number) =>

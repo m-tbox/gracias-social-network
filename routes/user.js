@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
             })
         }
         else {
-            res.status(403).json({
+            res.status(200).json({
                 userData: {},
                 error: true,
                 errorMsg: 'Unable to find the user with id: ' + userId
@@ -77,7 +77,7 @@ router.put("/:id", async (req, res) => {
                 })
             }
             else {
-                res.status(403).json({
+                res.status(200).json({
                     userData: {},
                     error: true,
                     errorMsg: 'Unable to update user'
@@ -127,7 +127,7 @@ router.delete("/:id", async (req, res) => {
                 })
             }
             else {
-                res.status(403).json({
+                res.status(200).json({
                     userData: {},
                     error: true,
                     errorMsg: 'Unable to delete user'
@@ -209,7 +209,7 @@ router.put("/:id/follow", async (req, res) => {
                     }
                 }
                 else {
-                    res.status(403).json({
+                    res.status(200).json({
                         userData: {},
                         error: true,
                         errorMsg: "You are already following this user or user does not exist"
@@ -217,7 +217,7 @@ router.put("/:id/follow", async (req, res) => {
                 }
             }
             else {
-                res.status(403).json({
+                res.status(200).json({
                     userData: {},
                     error: true,
                     errorMsg: "User not found"
@@ -292,7 +292,7 @@ router.put("/:id/unfollow", async (req, res) => {
                     }
                 }
                 else {
-                    res.status(403).json({
+                    res.status(200).json({
                         userData: {},
                         error: true,
                         errorMsg: "Error unfollowing user"
@@ -300,7 +300,7 @@ router.put("/:id/unfollow", async (req, res) => {
                 }
             }
             else {
-                res.status(403).json({
+                res.status(200).json({
                     userData: {},
                     error: true,
                     errorMsg: "User not found"

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   width: 100vw;
@@ -22,7 +22,7 @@ export const FormContainer = styled.div`
     justify-content: center;
 `
 
-export const FormBoxContainer = styled.div`
+export const Form = styled.form`
     height: 80%;
     padding: 20px;
     background-color: rgba(243, 224, 201, 0.5);
@@ -63,8 +63,8 @@ export const Input = styled.input`
     }
 `
 
-export const SignupLink = styled.span`
+export const SignupLink = styled(Link)`
     text-align: center;
     color: var(--app-blue);
-    cursor: pointer;
+    text-decoration: none;
 `

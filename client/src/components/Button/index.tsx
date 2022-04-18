@@ -1,12 +1,15 @@
 import { ButtonComponent } from "./StyledButton"
 
 type Props = {
-    title: string
+    title: string | React.ReactNode,
+    onClick?: | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined,
+    type?: any,
+    disabled?: boolean
 }
 
-function Button({ title }: Props) {
+function Button({ title, onClick, type, disabled }: Props) {
     return (
-        <ButtonComponent>
+        <ButtonComponent onClick={onClick} type={type} disabled={disabled}>
             {title}
         </ButtonComponent>
     )

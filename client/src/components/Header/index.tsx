@@ -17,10 +17,17 @@ import {
 import PersonIcon from '@mui/icons-material/Person'
 import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useContext } from "react";
+import { AuthConetext } from "context/auth/context";
 
 type Props = {}
 
 function Header({ }: Props) {
+
+    const { state } = useContext(AuthConetext as any);
+
+    const userData = state.user?.userData
+
     return (
         <Container>
             <LeftSection>
@@ -59,8 +66,12 @@ function Header({ }: Props) {
                     </IconItem>
                 </IconContainer>
 
-                <OptionLink to="/profile/2">
-                    <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt=""  />
+                <OptionLink to={`/profile/${userData?.id}`}>
+                    <ProfileImage src={
+                        userData?.profilePicture || '/profile.png'
+                    } 
+                    alt=""
+                     />
                 </OptionLink>
             </RightSection>
         </Container>

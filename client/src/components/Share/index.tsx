@@ -14,16 +14,22 @@ import {
     EmojiEmotionsIcon,
 } from './StyledShare'
 import Button from '../Button'
+import { useContext } from 'react'
+import { AuthConetext } from 'context/auth/context'
 
 type Props = {}
 
 function Share({ }: Props) {
+
+    const { state } = useContext(AuthConetext as any);
+    const userData = state.user?.userData;
+
     return (
         <Container>
             <Wrapper>
                 <TopSection>
                     <ProfileImage
-                        src="https://i.insider.com/623d200ea2e45b0019504e47?width=700"
+                        src={userData?.profilePicture || './profile.png'}
                         alt=""
                     />
                     <Input placeholder="What's in your mind" />
