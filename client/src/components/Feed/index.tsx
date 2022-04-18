@@ -5,7 +5,7 @@ import { Container, Wrapper } from "./StyledFeed"
 import { PostTypes } from "../../types"
 import { useEffect, useState } from "react"
 import axios from "axios";
-import { BASE_URL, TIMELINE_URL } from "../../constants";
+import { BASE_URL, PROFILE_POSTS, TIMELINE_URL } from "../../constants";
 
 type Props = {
     fromProfile?: boolean,
@@ -18,7 +18,8 @@ function Feed({ fromProfile, userId }: Props) {
 
     useEffect(() => {
         const fetchTimeLine = async () => {
-            let res = await axios.get(`${BASE_URL}/${TIMELINE_URL}/2`);
+            let apiUrl = fromProfile ? `${BASE_URL}/${TIMELINE_URL}/2` : `${BASE_URL}/${PROFILE_POSTS}/${userId}`;
+            let res = await axios.get(apiUrl);
             console.log(res.data)
             setPosts(res.data ? res.data.posts : []);
         }
