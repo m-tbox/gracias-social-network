@@ -68,6 +68,7 @@ export const OptionLink = styled(Link)`
    padding: 10px;
    text-decoration: none;
    color: var(--app-theme-text-color);
+   background-color: pink;
 `
 
 export const IconContainer = styled.div`
