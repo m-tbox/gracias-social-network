@@ -13,14 +13,15 @@ type Props = {
 }
 
 
-function Feed({ fromProfile, userId }: Props) {
+function Feed({ userId }: Props) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         const fetchTimeLine = async () => {
-            let apiUrl = fromProfile ? `${BASE_URL}/${TIMELINE_URL}/2` : `${BASE_URL}/${PROFILE_POSTS}/${userId}`;
-            let res = await axios.get(apiUrl);
-            console.log(res.data)
+            let res = userId ?
+                await axios.get(`${BASE_URL}/${PROFILE_POSTS}/${userId}`) :
+                await axios.get(`${BASE_URL}/${TIMELINE_URL}/2`);
+
             setPosts(res.data ? res.data.posts : []);
         }
 
@@ -30,7 +31,7 @@ function Feed({ fromProfile, userId }: Props) {
     return (
         <Container>
             <Wrapper>
-                {!fromProfile && <Share />}
+                {!userId && <Share />}
 
                 {
                     posts?.map((post: PostTypes, index: number) =>

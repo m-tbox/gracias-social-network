@@ -39,7 +39,7 @@ function Post({ id, description, image, createdAt, likedBy, comments, author }: 
         }
     }
 
-    const profileUrl = author?.profilePicture || 'profile.png';
+    const profileUrl = author?.profilePicture || '/profile.png';
 
     return (
         <Container>
