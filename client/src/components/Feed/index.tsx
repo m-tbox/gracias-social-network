@@ -6,18 +6,15 @@ import { PostTypes } from "../../types"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios";
 import { PROFILE_POSTS, TIMELINE_URL } from "../../constants";
-import { AuthConetext } from "context/auth/context"
 
 type Props = {
     fromProfile?: boolean,
+    userId: string | number | undefined
 }
 
 
-function Feed({ fromProfile }: Props) {
+function Feed({ fromProfile, userId }: Props) {
     const [posts, setPosts] = useState([]);
-    const { state } = useContext(AuthConetext as any);
-    const userData = state.user?.userData;
-    const userId = userData?.id;
 
     useEffect(() => {
         const fetchTimeLine = async () => {
@@ -25,10 +22,11 @@ function Feed({ fromProfile }: Props) {
                 await axios.get(`${PROFILE_POSTS}/${userId}`) :
                 await axios.get(`${TIMELINE_URL}/${userId}`);
 
-            setPosts(res.data ? res.data.posts : []);
+                console.log(res.data, 'WHYYYYY')
+
             setPosts(
-                res.data.sort((p1: PostTypes, p2: PostTypes) => {
-                    return +new Date(p2.createdAt) - +new Date(p1.createdAt);
+                res.data?.posts.sort((p1: PostTypes, p2: PostTypes) => {
+                    return +new Date(p2?.createdAt) - +new Date(p1?.createdAt);
                 })
               );
         }

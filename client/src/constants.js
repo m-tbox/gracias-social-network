@@ -7,3 +7,5 @@ export const LOGIN = `${BASE_URL}/auth/login`
 export const SIGNUP = `${BASE_URL}/auth/signup`
 export const NEW_POST_URL = `${BASE_URL}/posts`
 export const UPLOAD_IMAGE_URL = `${BASE_URL}/upload`
+export const GET_ALL_USERS = `${BASE_URL}/users`
+export const GET_SIGNFLE_USER = `${BASE_URL}/users`

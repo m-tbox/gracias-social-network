@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 
 router.post("/signup", async (req, res) => {
   try {
-    console.log(req.body, 'kkkk')
     const { username, email, password, profilePicture, coverPicture } = req.body;
 
     const salt = await bcrypt.genSalt(10);
@@ -69,6 +68,9 @@ router.post("/login", async (req, res) => {
       where: {
         email: req.body.email,
       },
+      include: {
+        following: true
+      }
     })
 
     if (user) {

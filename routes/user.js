@@ -13,6 +13,10 @@ router.get("/:id", async (req, res) => {
             where: {
                 id: parseInt(userId),
             },
+            include: {
+                following: true,
+                likes: true
+            }
         })
 
         if (user) {
@@ -319,6 +323,47 @@ router.put("/:id/unfollow", async (req, res) => {
             userData: {},
             error: true,
             errorMsg: "You can't unfollow yourself"
+        })
+    }
+});
+
+// Get All Users Except friend
+router.get("/", async (req, res) => {
+
+    // TODO: remove passwords
+    console.log('error')
+
+    try {
+        const userId = req.params.id
+
+        const users = await prisma.user.findMany({
+            include: {
+                following: true,
+                likes: true
+            }
+        })
+
+        if (users) {
+
+            res.status(200).json({
+                userData: users,
+                error: false,
+                errorMsg: ''
+            })
+        }
+        else {
+            res.status(200).json({
+                userData: {},
+                error: true,
+                errorMsg: 'Unable to find the user with id: ' + userId
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            userData: {},
+            error: true,
+            errorMsg: error
         })
     }
 });

@@ -22,14 +22,31 @@ import {
   Wrapper
 } from "./StyledRightbar"
 
-import { Users } from '../../dummyData'
 import { UserTypes } from "../../types"
+import { useContext, useEffect, useState } from "react"
+import { AuthConetext } from "context/auth/context"
+import axios from "axios"
+import { GET_ALL_USERS } from "../../constants"
 
 type Props = {
   fromProfile?: boolean
 }
 
 function Rightbar({ fromProfile }: Props) {
+  const { state } = useContext(AuthConetext as any);
+  const userData = state.user?.userData;
+  const [allUsers, setAllUsers] = useState([]);
+
+
+  useEffect(() => {
+    const fetchTimeLine = async () => {
+      let res = await axios.get(`${GET_ALL_USERS}`);
+      setAllUsers(res?.data?.userData);
+    }
+
+    fetchTimeLine();
+  }, []);
+
   const HomeRightbar = () => (
     <>
       <BirthdayContainer>
@@ -41,17 +58,17 @@ function Rightbar({ fromProfile }: Props) {
 
       <AdImage src="mac-ad.jpeg" alt="" />
       <Title>
-        Online Friends
+        All Users
       </Title>
 
       <OnlineFriendList>
         {
-          Users.map((user: UserTypes) =>
-            <OnlineFriendListItem key={user.id}>
+          allUsers?.map((user: UserTypes) =>
+            <OnlineFriendListItem to={`profile/${user.id}`} key={user.id}>
               <FriendProfileContainer>
-                <FriendImage src={user.profilePicture} alt="" />
+                <FriendImage src={user?.profilePicture || '/profile.png'} alt="" />
 
-                <OnlineStatus></OnlineStatus>
+                {/* <OnlineStatus></OnlineStatus> */}
               </FriendProfileContainer>
 
               <span>
@@ -70,7 +87,7 @@ function Rightbar({ fromProfile }: Props) {
       <InfoContainer>
         <InfoItem>
           <InfoItemLabel>City: </InfoItemLabel>
-          <InfoItemValue>New York</InfoItemValue>
+          <InfoItemValue>{userData.city}</InfoItemValue>
         </InfoItem>
 
         <InfoItem>
@@ -84,38 +101,18 @@ function Rightbar({ fromProfile }: Props) {
         </InfoItem>
       </InfoContainer>
 
-      <UserFriends>User Friends</UserFriends>
+      {/* <UserFriends>User Friends</UserFriends>
       <FriendFollowing>
-        <FriendFollowingItem>
-          <FriendFollowingImage src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" alt="" />
-          <FriendFollowingName>Rose rosy</FriendFollowingName>
-        </FriendFollowingItem>
 
-        <FriendFollowingItem>
-          <FriendFollowingImage src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" alt="" />
-          <FriendFollowingName>Tulip</FriendFollowingName>
-        </FriendFollowingItem>
-
-        <FriendFollowingItem>
-          <FriendFollowingImage src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" alt="" />
-          <FriendFollowingName>Lily</FriendFollowingName>
-        </FriendFollowingItem>
-
-        <FriendFollowingItem>
-          <FriendFollowingImage src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" alt="" />
-          <FriendFollowingName>Kate</FriendFollowingName>
-        </FriendFollowingItem>
-
-        <FriendFollowingItem>
-          <FriendFollowingImage src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" alt="" />
-          <FriendFollowingName>Jean</FriendFollowingName>
-        </FriendFollowingItem>
-
-        <FriendFollowingItem>
-          <FriendFollowingImage src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg.jpg" alt="" />
-          <FriendFollowingName>Sana</FriendFollowingName>
-        </FriendFollowingItem>
-      </FriendFollowing>
+        {
+          userData?.following.map((friend: UserTypes) =>
+            <FriendFollowingItem>
+              <FriendFollowingImage src={friend.profilePicture || '/profile.png'} alt="" />
+              <FriendFollowingName>{friend.username}</FriendFollowingName>
+            </FriendFollowingItem>
+          )
+        }
+      </FriendFollowing> */}
     </>
   )
 

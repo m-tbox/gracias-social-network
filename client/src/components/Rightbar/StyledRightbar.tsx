@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 export const Container = styled.div`
@@ -40,10 +41,11 @@ export const OnlineFriendList = styled.ul`
     list-style: none;
 `
 
-export const OnlineFriendListItem = styled.li`
+export const OnlineFriendListItem = styled(Link)`
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    text-decoration: none;
 `
 
 export const FriendProfileContainer = styled.div`

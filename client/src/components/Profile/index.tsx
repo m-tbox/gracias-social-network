@@ -14,15 +14,29 @@ import {
     Username,
     Description,
 } from './StyledProfile'
-import { useContext } from 'react'
-import { AuthConetext } from 'context/auth/context'
+import { useParams } from 'react-router'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { UserTypes } from 'types'
+import { GET_SIGNFLE_USER } from '../../constants'
 
 type Props = {}
 
 function Profile({ }: Props) {
+    let userIdInUrl = useParams().userId;
 
-    const { state } = useContext(AuthConetext as any);
-    const userData = state.user?.userData;
+    let [userProfile, setUserProfile] = useState({} as UserTypes);
+
+    useEffect(() => {
+        let apiURL = `${GET_SIGNFLE_USER}/${userIdInUrl}`;
+        const fetchUser = async () => {
+            const res = await axios.get(apiURL);
+            setUserProfile(res.data?.userData);
+        };
+
+        console.log(userProfile, userIdInUrl, 'llll')
+        fetchUser();
+    }, [userIdInUrl]);
 
     return (
         <>
@@ -34,18 +48,19 @@ function Profile({ }: Props) {
                 <RightContainer>
                     <TopRightContainer>
                         <CoverContainer>
-                            <CoverImage src={userData?.coverPicture || '/app_logo.jpeg'} alt="" />
-                            <ProfileImage src={userData?.profilePicture || '/profile.png'} alt="" />
+                            <CoverImage src={userProfile?.coverPicture || '/app_logo.jpeg'} alt="" />
+                            <ProfileImage src={userProfile?.profilePicture || '/profile.png'} alt="" />
                         </CoverContainer>
                         <ProfileInfo>
-                            <Username>{userData.username}</Username>
-                            <Description>{userData.description}</Description>
+                            <Username>{userProfile?.username}</Username>
+                            <Description>{userProfile?.description}</Description>
                         </ProfileInfo>
                     </TopRightContainer>
 
                     <BottomRightContainer>
                         <Feed
                             fromProfile={true}
+                            userId={userIdInUrl}
                         />
                         <Rightbar fromProfile={true} />
                     </BottomRightContainer>

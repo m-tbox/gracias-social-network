@@ -33,7 +33,7 @@ function App() {
           </>
         } />
 
-        <Route path="/profile/:username" element={
+        <Route path="/profile/:userId" element={
           <Profile />
         } />
       </Routes>
