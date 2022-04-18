@@ -1,12 +1,14 @@
-import styled from "styled-components"
-import PermMedia from '@mui/icons-material/PermMedia';
-import Label from '@mui/icons-material/Label';
-import Room from '@mui/icons-material/Room';
-import EmojiEmotions from '@mui/icons-material/EmojiEmotions';
+import styled from "styled-components";
+import {
+    Cancel,
+    PermMedia,
+    Label,
+    Room,
+    EmojiEmotions
+} from "@mui/icons-material";
 
 export const Container = styled.div`
     width: 100%;
-    height: 170px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
     box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
@@ -85,4 +87,22 @@ export const EmojiEmotionsIcon = styled(EmojiEmotions)`
     font-size: 18px;
     margin-right: 3px;
     color: goldenrod;
+`;
+
+export const ShareImageContainer = styled.div`
+    padding: 0 20px 10px 20px;
+    position: relative;
+`;
+
+export const ShareImage = styled.img`
+    width: 100%;
+    object-fit: cover;
+`;
+
+export const CancelIcon = styled(Cancel)`
+    position: absolute;
+    top: 0;
+    right: 20px;
+    cursor: pointer;
+    opacity: 0.7;
 `;

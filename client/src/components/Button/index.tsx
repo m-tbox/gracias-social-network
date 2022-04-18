@@ -9,7 +9,11 @@ type Props = {
 
 function Button({ title, onClick, type, disabled }: Props) {
     return (
-        <ButtonComponent onClick={onClick} type={type} disabled={disabled}>
+        <ButtonComponent
+            onClick={onClick}
+            type={type}
+            disabled={disabled}
+        >
             {title}
         </ButtonComponent>
     )

@@ -331,7 +331,6 @@ router.put("/:id/unfollow", async (req, res) => {
 router.get("/", async (req, res) => {
 
     // TODO: remove passwords
-    console.log('error')
 
     try {
         const userId = req.params.id

@@ -34,7 +34,6 @@ function Profile({ }: Props) {
             setUserProfile(res.data?.userData);
         };
 
-        console.log(userProfile, userIdInUrl, 'llll')
         fetchUser();
     }, [userIdInUrl]);
 
@@ -62,7 +61,10 @@ function Profile({ }: Props) {
                             fromProfile={true}
                             userId={userIdInUrl}
                         />
-                        <Rightbar fromProfile={true} />
+                        <Rightbar
+                            fromProfile={true}
+                            profileUserId={userIdInUrl}
+                        />
                     </BottomRightContainer>
                 </RightContainer>
             </Container>

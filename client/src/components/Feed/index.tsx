@@ -3,7 +3,7 @@ import Share from "../Share"
 import { Container, Wrapper } from "./StyledFeed"
 // import { Posts } from '../../dummyData'
 import { PostTypes } from "../../types"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 import { PROFILE_POSTS, TIMELINE_URL } from "../../constants";
 
@@ -21,8 +21,6 @@ function Feed({ fromProfile, userId }: Props) {
             let res = fromProfile ?
                 await axios.get(`${PROFILE_POSTS}/${userId}`) :
                 await axios.get(`${TIMELINE_URL}/${userId}`);
-
-                console.log(res.data, 'WHYYYYY')
 
             setPosts(
                 res.data?.posts.sort((p1: PostTypes, p2: PostTypes) => {

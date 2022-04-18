@@ -28,8 +28,6 @@ function Signup({ }: Props) {
 
     const handleSignup = async (e: any) => {
         e.preventDefault();
-
-        console.log(password.current.value, confirmPassword.current.value, 'kkkk');
         
         if (password.current.value !== confirmPassword.current.value) {
             password.current.setCustomValidity("Passwords don't match");

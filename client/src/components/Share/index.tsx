@@ -12,6 +12,9 @@ import {
     RoomIcon,
     EmojiEmotionsIcon,
     Form,
+    ShareImage,
+    CancelIcon,
+    ShareImageContainer,
 } from './StyledShare'
 import Button from '../Button'
 import { useContext, useRef, useState } from 'react'
@@ -51,7 +54,6 @@ function Share({ }: Props) {
             newPost.image = fileName;
 
             try {
-                console.log(UPLOAD_IMAGE_URL, 'ffff')
 
                 const res = await axios.post(UPLOAD_IMAGE_URL, data, {
                     headers: {
@@ -60,7 +62,6 @@ function Share({ }: Props) {
                     }
                 });
 
-                console.log(res, 'Nande')
             } catch (error) {
                 console.log(error);
             }
@@ -90,6 +91,13 @@ function Share({ }: Props) {
                 </TopSection>
 
                 <hr />
+
+                {file && (
+                    <ShareImageContainer>
+                        <ShareImage src={URL.createObjectURL(file)} alt="" />
+                        <CancelIcon onClick={() => setFile(null)} />
+                    </ShareImageContainer>
+                )}
 
                 <BottomSection>
                     <ShareOptions>

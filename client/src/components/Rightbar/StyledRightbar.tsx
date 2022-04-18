@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { Button } from "@mui/material"
+import ButtonComponent from '../Button'
 
 export const Container = styled.div`
     flex: 3.5;
@@ -117,4 +119,34 @@ export const FriendFollowingImage = styled.img`
 `
 
 export const FriendFollowingName = styled.span`
+`
+
+export const FollowButton = styled(ButtonComponent)`
+    
+`
+
+export const LogoutButton = styled(Button)`
+    background-color: var(--app-blue) !important;
+    color: var(--app-theme-text-color) !important;
+    border: none !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+
+    height: 40px !important;
+`
+
+export const UnFollowButton = styled(Button)`
+    background-color: var(--badge-color) !important;
+    color: var(--app-theme-text-color) !important;
+    border: none !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+
+    height: 40px !important;
+`
+
+export const LogoutConatiner = styled.div`
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
 `

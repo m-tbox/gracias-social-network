@@ -106,9 +106,9 @@ function Post({ id, description, image, createdAt, likedBy, comments, author }: 
                             </LikeCounter>
                         </LikeContainer>
 
-                        <Comments>
+                        {/* <Comments>
                             {comments} comments
-                        </Comments>
+                        </Comments> */}
                     </BottomSection>
                 </Wrapper>
             }
