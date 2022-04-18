@@ -17,6 +17,7 @@ import {
 import PersonIcon from '@mui/icons-material/Person'
 import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { Link } from "react-router-dom";
 
 type Props = {}
 
@@ -59,9 +60,9 @@ function Header({ }: Props) {
                     </IconItem>
                 </IconContainer>
 
-                <OptionLink to="/profile/2">
+                <Link to="/profile/2">
                     <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt=""  />
-                </OptionLink>
+                </Link>
             </RightSection>
         </Container>
     )
