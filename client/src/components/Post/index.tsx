@@ -11,6 +11,7 @@ import {
     LikeIcon,
     LikeOutlineIcon,
     PostDate,
+    PostDescription,
     PostImage,
     ProfileImage,
     TopSection,
@@ -22,7 +23,7 @@ import {
 import { format } from 'timeago.js';
 import axios from 'axios';
 import { AuthConetext } from 'context/auth/context';
-import { BASE_URL } from '../../constants';
+import { BASE_URL, IMGAE_BASE_URL } from '../../constants';
 
 function Post({ id, description, image, createdAt, likedBy, comments, author }: PostTypes) {
     let likes = 0;
@@ -82,11 +83,11 @@ function Post({ id, description, image, createdAt, likedBy, comments, author }: 
                     </TopSection>
 
                     <CenterSection>
-                        <span>
+                        <PostDescription>
                             {description}
-                        </span>
+                        </PostDescription>
                         <PostImage
-                            src={image}
+                            src={ `${IMGAE_BASE_URL}/${image}`}
                             alt=""
                         />
                     </CenterSection>

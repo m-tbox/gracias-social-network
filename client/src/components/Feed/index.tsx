@@ -26,6 +26,11 @@ function Feed({ fromProfile }: Props) {
                 await axios.get(`${TIMELINE_URL}/${userId}`);
 
             setPosts(res.data ? res.data.posts : []);
+            setPosts(
+                res.data.sort((p1: PostTypes, p2: PostTypes) => {
+                    return +new Date(p2.createdAt) - +new Date(p1.createdAt);
+                })
+              );
         }
 
         fetchTimeLine();

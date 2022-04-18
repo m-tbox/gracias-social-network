@@ -12,7 +12,7 @@ export const Container = styled.div`
     box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 `
 
-export const Wrapper = styled.div`
+export const Form = styled.form`
     padding: 10px;
 `
 
@@ -38,9 +38,12 @@ export const ProfileImage = styled.img`
 export const Input = styled.input`
     border: none;
     width: 80%;
+    height: 50px;
     :focus {
        outline: none;
     }
+    font-size: 17px;
+    border-bottom: 1px solid var(--app-border-color);
 `
 
 export const ShareOptions = styled.div`
@@ -48,7 +51,7 @@ export const ShareOptions = styled.div`
     margin-left: 20px;
 `
 
-export const ShareOptionItem = styled.div`
+export const ShareOptionItem = styled.label`
     display: flex;
     align-items: center;
     margin-right: 15px;
