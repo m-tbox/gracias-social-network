@@ -15,7 +15,7 @@ export const callLoginApi = async (data, dispatch) => {
             }
         });
 
-        console.log(res.data);
+        console.log(res.data, 'LOGIN SUCCESS'); 
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
 
         if (res.data?.errorMsg) {

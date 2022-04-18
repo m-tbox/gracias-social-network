@@ -10,7 +10,8 @@ import { AuthConetext } from 'context/auth/context';
 
 function App() {
   const { state } = useContext(AuthConetext as any);
-  const userLoggedIn = state.user?.userData.id
+  console.log(state.user, 'SSS')
+  const userLoggedIn = state?.user?.userData?.id
 
   return (
     <Router>

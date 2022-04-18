@@ -53,7 +53,6 @@ function Rightbar({ fromProfile, profileUserId }: Props) {
         await axios.put(`${BASE_URL}/users/${userData.id}/unfollow`, { userId: profileUserId });
         dispatch({ type: "UNFOLLOW", payload: profileUserId });
       } else {
-        console.log(profileUserId, userData.id, 'dkskaldkj')
         await axios.put(`${BASE_URL}/users/${userData.id}/follow`, { userId: profileUserId });
         dispatch({ type: "FOLLOW", payload: profileUserId });
       }
@@ -64,6 +63,7 @@ function Rightbar({ fromProfile, profileUserId }: Props) {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    dispatch({ type: "LOGIN_SUCCESS", payload: {} });
     navigate('/login');
   }
 
@@ -90,7 +90,7 @@ function Rightbar({ fromProfile, profileUserId }: Props) {
 
       <AdImage src="mac-ad.jpeg" alt="" />
       <Title>
-        Friend Recommendations
+        Users
       </Title>
 
       <OnlineFriendList>
@@ -117,7 +117,7 @@ function Rightbar({ fromProfile, profileUserId }: Props) {
     <>
       <LogoutConatiner>
         {
-          profileUserId !== userData?.id && (
+          profileUserId != userData?.id && (
             <>
               {
                 followed ?
@@ -131,11 +131,12 @@ function Rightbar({ fromProfile, profileUserId }: Props) {
                   />
               }
             </>
-          )}
+          )
+        }
 
-        {/* <LogoutButton onClick={handleLogout}>
+        <LogoutButton onClick={handleLogout}>
           Logout
-        </LogoutButton> */}
+        </LogoutButton>
       </LogoutConatiner>
 
       <h1>User Information</h1>
