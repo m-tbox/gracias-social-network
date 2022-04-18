@@ -17,17 +17,10 @@ import {
 import PersonIcon from '@mui/icons-material/Person'
 import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {}
 
 function Header({ }: Props) {
-    const navigate = useNavigate();
-    
-    const openProfilePage = () => {
-        navigate('/profile/2');
-    }
-
     return (
         <Container>
             <LeftSection>
@@ -66,11 +59,9 @@ function Header({ }: Props) {
                     </IconItem>
                 </IconContainer>
 
-                <ProfileImage
-                    src="https://i.insider.com/623d200ea2e45b0019504e47?width=700"
-                    alt=""
-                    onClick={openProfilePage}
-                />
+                <OptionLink to="/profile/2">
+                    <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt=""  />
+                </OptionLink>
             </RightSection>
         </Container>
     )

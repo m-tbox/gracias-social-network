@@ -38,7 +38,10 @@ function Profile({ }: Props) {
                     </TopRightContainer>
 
                     <BottomRightContainer>
-                        <Feed fromProfile={true} />
+                        <Feed
+                            fromProfile={true}
+                            userId={2}
+                        />
                         <Rightbar fromProfile={true} />
                     </BottomRightContainer>
                 </RightContainer>

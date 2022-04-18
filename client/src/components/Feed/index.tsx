@@ -8,11 +8,12 @@ import axios from "axios";
 import { BASE_URL, TIMELINE_URL } from "../../constants";
 
 type Props = {
-    fromProfile?: boolean
+    fromProfile?: boolean,
+    userId?: number
 }
 
 
-function Feed({ fromProfile }: Props) {
+function Feed({ fromProfile, userId }: Props) {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
