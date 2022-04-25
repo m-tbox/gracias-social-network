@@ -33,8 +33,24 @@ export type PostTypes = {
     likedBy?: []
 }
 
+export type User = {
+    id: number
+    username: string,
+    email: string,
+    profilePicture?: string,
+    coverPicture?: string,
+    isAdmin?: boolean,
+    description?: string,
+    city?: string,
+    createdAt?: string,
+    updatedAt?: string
+}
+
 export type UserTypes = {
     id: string,
     profilePicture?: string,
     username: string,
+    coverPicture?: string,
+    description?: string,
+    following?: [User]
 }

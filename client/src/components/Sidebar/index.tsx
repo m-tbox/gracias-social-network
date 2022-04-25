@@ -1,4 +1,6 @@
-import { Users } from "../../dummyData"
+import { AuthConetext } from "context/auth/context"
+import { useContext } from "react"
+import { useNavigate } from "react-router"
 import { UserTypes } from "../../types"
 import {
     ListItemText,
@@ -21,12 +23,22 @@ import {
     FriendListItem,
     FriendImg,
     FriendName,
+    FriendTitle,
 } from "./StyledSidebar"
 
 
 type Props = {}
 
 function Sidebar({ }: Props) {
+    const { state } = useContext(AuthConetext as any);
+    const userData = state.user?.userData;
+    const navigate = useNavigate();
+
+    const handleFriendClick = (friendId: string) => {
+        navigate('/login');
+        navigate(`/profile/${friendId}`, { replace: true });
+    }
+
     return (
         <Container>
             <Wrapper>
@@ -100,12 +112,17 @@ function Sidebar({ }: Props) {
                 </Button>
                 <HR />
 
+                <FriendTitle>User Friends</FriendTitle>
+
                 <FriendListContainer>
                     {
-                        Users.map((user: UserTypes) =>
-                            <FriendListItem key={user.id}>
-                                <FriendImg src={user.profilePicture} alt="" />
-                                <FriendName>{user.username}</FriendName>
+                        userData.following.map((friend: UserTypes) =>
+                            <FriendListItem
+                                onClick={() => handleFriendClick(friend.id)}
+                                key={friend.id}
+                            >
+                                <FriendImg src={friend.profilePicture || '/profile.png'} alt="" />
+                                <FriendName>{friend.username}</FriendName>
                             </FriendListItem>
                         )
                     }

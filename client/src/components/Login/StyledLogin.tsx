@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Progress from '@mui/material/CircularProgress';
 
 export const Container = styled.div`
   width: 100vw;
@@ -21,7 +22,7 @@ export const FormContainer = styled.div`
     justify-content: center;
 `
 
-export const FormBoxContainer = styled.div`
+export const Form = styled.form`
     height: 80%;
     padding: 20px;
     background-color: rgba(243, 224, 201, 0.5);
@@ -71,4 +72,8 @@ export const SignupLink = styled.span`
     text-align: center;
     color: var(--app-blue);
     cursor: pointer;
+`
+
+export const CircularProgress = styled(Progress)`
+    color: var(--app-theme-text-color) !important;
 `

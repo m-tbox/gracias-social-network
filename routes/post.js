@@ -431,11 +431,15 @@ router.get("/profile/:id", async (req, res) => {
                 where: {
                     userId: loggedInUser.id,
                 },
+                include: {
+                    likedBy: true,
+                    author: true,
+                }
             });
 
 
             res.status(200).json({
-                posts: loggedInUserPosts,
+                posts: [loggedInUserPosts],
                 error: false,
                 errorMsg: ''
             })

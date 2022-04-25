@@ -4,16 +4,51 @@ import {
     AppInfoContainer,
     AppTitle,
     AppDescription,
-    FormBoxContainer,
+    Form,
     Wrapper,
     Input,
-    SignupLink
+    SignupLink,
 } from "./StyledSignup"
 import Button from '../Button'
+import { useRef } from "react"
+import axios from "axios";
+import { useNavigate } from "react-router";
+import { SIGNUP } from "../../constants";
 
 type Props = {}
 
 function Signup({ }: Props) {
+    const username = useRef<any>();
+    const email = useRef<any>();
+    const password = useRef<any>();
+    const confirmPassword = useRef<any>();
+
+    const navigate = useNavigate();
+
+
+    const handleSignup = async (e: any) => {
+        e.preventDefault();
+        
+        if (password.current.value !== confirmPassword.current.value) {
+            password.current.setCustomValidity("Passwords don't match");
+            password.current.reportValidity();
+        }
+        else {
+            const user = {
+                username: username.current.value,
+                email: email.current.value,
+                password: password.current.value,
+            }
+
+            try {
+                await axios.post(SIGNUP, user);
+                navigate('/login');
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
     return (
         <Container>
             <Wrapper>
@@ -23,19 +58,41 @@ function Signup({ }: Props) {
                 </AppInfoContainer>
 
                 <FormContainer>
-                    <FormBoxContainer>
-                        <Input placeholder="Username" />
-                        <Input placeholder="Email" />
-                        <Input placeholder="Password" />
-                        <Input placeholder="Password Confirmation" />
-                        <Input placeholder="Password" />
+                    <Form onSubmit={handleSignup}>
+                        <Input
+                            placeholder="Username"
+                            ref={username}
+                            required
+                        />
+                        <Input
+                            placeholder="Email"
+                            ref={email}
+                            required
+                            type="email"
+                        />
+                        <Input
+                            placeholder="Password"
+                            ref={password}
+                            required
+                            type="password"
+                            minLength={6}
+                        />
+                        <Input
+                            placeholder="Password Confirmation"
+                            ref={confirmPassword}
+                            required
+                            type="password"
+                        />
 
                         <Button
                             title="Sign up"
+                            type="submit"
                         />
 
-                        <SignupLink>Login to your Account</SignupLink>
-                    </FormBoxContainer>
+                        <SignupLink to="/login">
+                            Login to your Account
+                        </SignupLink>
+                    </Form>
                 </FormContainer>
             </Wrapper>
         </Container>

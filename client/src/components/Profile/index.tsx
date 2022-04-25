@@ -14,10 +14,29 @@ import {
     Username,
     Description,
 } from './StyledProfile'
+import { useParams } from 'react-router'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { UserTypes } from 'types'
+import { GET_SIGNFLE_USER } from '../../constants'
 
 type Props = {}
 
 function Profile({ }: Props) {
+    let userIdInUrl = useParams().userId;
+
+    let [userProfile, setUserProfile] = useState({} as UserTypes);
+
+    useEffect(() => {
+        let apiURL = `${GET_SIGNFLE_USER}/${userIdInUrl}`;
+        const fetchUser = async () => {
+            const res = await axios.get(apiURL);
+            setUserProfile(res.data?.userData);
+        };
+
+        fetchUser();
+    }, [userIdInUrl]);
+
     return (
         <>
             <Header />
@@ -28,21 +47,24 @@ function Profile({ }: Props) {
                 <RightContainer>
                     <TopRightContainer>
                         <CoverContainer>
-                            <CoverImage src="https://pbs.twimg.com/media/FOKM2GVXoAw0T81?format=jpg&name=medium" alt="" />
-                            <ProfileImage src="https://i.insider.com/623d200ea2e45b0019504e47?width=700" alt="" />
+                            <CoverImage src={userProfile?.coverPicture || '/app_logo.jpeg'} alt="" />
+                            <ProfileImage src={userProfile?.profilePicture || '/profile.png'} alt="" />
                         </CoverContainer>
                         <ProfileInfo>
-                            <Username>Keanu</Username>
-                            <Description>Hiii</Description>
+                            <Username>{userProfile?.username}</Username>
+                            <Description>{userProfile?.description}</Description>
                         </ProfileInfo>
                     </TopRightContainer>
 
                     <BottomRightContainer>
                         <Feed
                             fromProfile={true}
-                            userId={2}
+                            userId={userIdInUrl}
                         />
-                        <Rightbar fromProfile={true} />
+                        <Rightbar
+                            fromProfile={true}
+                            profileUserId={userIdInUrl}
+                        />
                     </BottomRightContainer>
                 </RightContainer>
             </Container>

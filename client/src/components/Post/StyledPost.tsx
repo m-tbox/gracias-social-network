@@ -11,7 +11,7 @@ export const Container = styled.div`
 `
 
 export const Wrapper = styled.div`
-    padding: 10px;
+    padding: 20px;
 `
 
 export const TopSection = styled.div`
@@ -46,11 +46,16 @@ export const CenterSection = styled.div`
     margin: 20px 0;
 `
 
+export const PostDescription = styled.span`
+`
+
 export const PostImage = styled.img`
     margin-top: 20px;
     width: 100%;
     max-height: 500px;
     object-fit: contain;
+    background-color: #000;
+    border-radius: 5px;
 `
 
 

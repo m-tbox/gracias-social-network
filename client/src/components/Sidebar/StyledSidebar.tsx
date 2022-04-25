@@ -60,14 +60,19 @@ export const HR = styled.hr`
 
 export const FriendListContainer = styled.ul`
     padding: 0;
-    margin: 0;
+    margin-top: 15px;
     list-style: none;
+`
+
+export const FriendTitle = styled.span`
+    font-weight: bold;
 `
 
 export const FriendListItem = styled.li`
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    cursor: pointer;
 `
 
 export const FriendImg = styled.img`

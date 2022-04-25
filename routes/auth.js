@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 
 router.post("/signup", async (req, res) => {
   try {
-    console.log(req.body, 'kkkk')
     const { username, email, password, profilePicture, coverPicture } = req.body;
 
     const salt = await bcrypt.genSalt(10);
@@ -69,6 +68,9 @@ router.post("/login", async (req, res) => {
       where: {
         email: req.body.email,
       },
+      include: {
+        following: true
+      }
     })
 
     if (user) {
@@ -83,7 +85,7 @@ router.post("/login", async (req, res) => {
           errorMsg: ''
         })
       } else {
-        res.status(400).json({
+        res.status(200).json({
           userData: {},
           error: true,
           errorMsg: "Invalid Password"
@@ -92,7 +94,7 @@ router.post("/login", async (req, res) => {
 
     }
     else {
-      res.status(401).json({
+      res.status(200).json({
         userData: {},
         error: true,
         errorMsg: "User does not exist"

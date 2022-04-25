@@ -5,11 +5,11 @@ import { Container, Wrapper } from "./StyledFeed"
 import { PostTypes } from "../../types"
 import { useEffect, useState } from "react"
 import axios from "axios";
-import { BASE_URL, TIMELINE_URL } from "../../constants";
+import { PROFILE_POSTS, TIMELINE_URL } from "../../constants";
 
 type Props = {
     fromProfile?: boolean,
-    userId?: number
+    userId: string | number | undefined
 }
 
 
@@ -18,13 +18,19 @@ function Feed({ fromProfile, userId }: Props) {
 
     useEffect(() => {
         const fetchTimeLine = async () => {
-            let res = await axios.get(`${BASE_URL}/${TIMELINE_URL}/2`);
-            console.log(res.data)
-            setPosts(res.data ? res.data.posts : []);
+            let res = fromProfile ?
+                await axios.get(`${PROFILE_POSTS}/${userId}`) :
+                await axios.get(`${TIMELINE_URL}/${userId}`);
+
+            setPosts(
+                res.data?.posts.sort((p1: PostTypes, p2: PostTypes) => {
+                    return +new Date(p2?.createdAt) - +new Date(p1?.createdAt);
+                })
+              );
         }
 
         fetchTimeLine();
-    }, []);
+    }, [userId]);
 
     return (
         <Container>
